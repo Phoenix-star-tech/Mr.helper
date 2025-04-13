@@ -370,8 +370,8 @@ def suggest():
         conn = psycopg2.connect(DATABASE_URL, sslmode='require')
         cursor = conn.cursor()
 
-        # Query for business types
-        cursor.execute("SELECT business_type FROM services WHERE business_type ILIKE %s LIMIT 10", ('%' + term + '%',))
+        # Query for business types in users table
+        cursor.execute("SELECT business_type FROM users WHERE business_type ILIKE %s LIMIT 10", ('%' + term + '%',))
         services = [row[0] for row in cursor.fetchall()]  # Access the first column (business_type)
 
         # Query for usernames

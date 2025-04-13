@@ -1,9 +1,14 @@
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify
-import os
 import random
 import psycopg2
 import psycopg2.extras
 from werkzeug.utils import secure_filename
+from dotenv import load_dotenv
+import os
+
+load_dotenv()  # This loads the variables from the .env file
+
+DATABASE_URL = os.getenv('DATABASE_URL')
 
 app = Flask(__name__)
 app.secret_key = 'karthik57'

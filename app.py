@@ -365,22 +365,24 @@ def search():
 
 @app.route('/suggest')
 def suggest():
-    term = request.args.get('term', '').lower()
-    with get_db_connection() as conn:
+    term = request.args.get('term', '')
+    if term:
+        conn = psycopg2.connect(DATABASE_URL, sslmode='require')
         cursor = conn.cursor()
-        
-        # Updated query to use %s placeholder for PostgreSQL
-        cursor.execute("SELECT DISTINCT business_type FROM users WHERE LOWER(business_type) LIKE %s", ('%' + term + '%',))
-        services = [row['business_type'] for row in cursor.fetchall()]
-        
-        cursor.execute("SELECT username FROM users WHERE LOWER(username) LIKE %s", ('%' + term + '%',))
-        users = [row['username'] for row in cursor.fetchall()]
-        
-        cursor.execute("SELECT DISTINCT location FROM users WHERE LOWER(location) LIKE %s", ('%' + term + '%',))
-        locations = [row['location'] for row in cursor.fetchall()]
-    
-    return jsonify(list(set(services + users + locations)))
 
+        # Query for business types
+        cursor.execute("SELECT business_type FROM services WHERE business_type ILIKE %s LIMIT 10", ('%' + term + '%',))
+        services = [row[0] for row in cursor.fetchall()]  # Access the first column, which is 'business_type'
+
+        # Query for usernames
+        cursor.execute("SELECT username FROM users WHERE username ILIKE %s LIMIT 10", ('%' + term + '%',))
+        users = [row[0] for row in cursor.fetchall()]  # Access the first column, which is 'username'
+
+        conn.close()
+
+        # Return the results as JSON
+        return jsonify({'services': services, 'users': users})
+    return jsonify({'services': [], 'users': []})
 
 @app.route('/service/<service_name>')
 def service(service_name):

@@ -8,6 +8,8 @@ import os
 
 load_dotenv()  # This loads the variables from the .env file
 
+from init_db import init_db
+init_db()
 DATABASE_URL = os.getenv('DATABASE_URL')
 
 app = Flask(__name__)

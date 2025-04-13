@@ -372,11 +372,11 @@ def suggest():
 
         # Query for business types
         cursor.execute("SELECT business_type FROM services WHERE business_type ILIKE %s LIMIT 10", ('%' + term + '%',))
-        services = [row[0] for row in cursor.fetchall()]  # Access the first column, which is 'business_type'
+        services = [row[0] for row in cursor.fetchall()]  # Access the first column (business_type)
 
         # Query for usernames
         cursor.execute("SELECT username FROM users WHERE username ILIKE %s LIMIT 10", ('%' + term + '%',))
-        users = [row[0] for row in cursor.fetchall()]  # Access the first column, which is 'username'
+        users = [row[0] for row in cursor.fetchall()]  # Access the first column (username)
 
         conn.close()
 

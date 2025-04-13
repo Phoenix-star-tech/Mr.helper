@@ -220,7 +220,7 @@ def signup_user():
                     error = "An error occurred. Please try again."
     return render_template('signup_user.html', error=error)
 
-@app.route('/profile')
+@app.route('/profile/')
 @app.route('/profile/<username>')
 def profile(username=None):
     if username is None:

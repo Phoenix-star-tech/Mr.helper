@@ -28,20 +28,20 @@ def allowed_file(filename):
 def init_db():
     with get_db_connection() as conn:
         cursor = conn.cursor()
-        cursor.execute("""
-            CREATE TABLE IF NOT EXISTS users (
-                id SERIAL PRIMARY KEY,
-                username TEXT UNIQUE,
-                password TEXT,
-                account_type TEXT,
-                phone TEXT,
-                business_type TEXT,
-                location TEXT,
-                bio TEXT,
-                profile_pic TEXT,
-                price TEXT
-            );
-        """)
+        cursor.execute('''
+        CREATE TABLE IF NOT EXISTS users (
+            id SERIAL PRIMARY KEY,
+            username TEXT UNIQUE NOT NULL,
+            password TEXT NOT NULL,
+            account_type TEXT,
+            phone TEXT,
+            business_type TEXT,
+            location TEXT,
+            bio TEXT,
+            price TEXT,
+            profile_pic TEXT
+        );
+    ''')
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS feedback (
                 id SERIAL PRIMARY KEY,

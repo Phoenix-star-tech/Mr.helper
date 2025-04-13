@@ -8,8 +8,6 @@ import os
 
 load_dotenv()  # This loads the variables from the .env file
 
-from init_db import init_db
-init_db()
 DATABASE_URL = os.getenv('DATABASE_URL')
 
 app = Flask(__name__)
@@ -28,23 +26,28 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def init_db():
+    # Get database connection using your get_db_connection function
     with get_db_connection() as conn:
         cursor = conn.cursor()
-        cursor.execute('''
-        CREATE TABLE IF NOT EXISTS users (
-            id SERIAL PRIMARY KEY,
-            username TEXT UNIQUE NOT NULL,
-            password TEXT NOT NULL,
-            account_type TEXT,
-            phone TEXT,
-            business_type TEXT,
-            location TEXT,
-            bio TEXT,
-            price TEXT,
-            profile_pic TEXT
-        );
-    ''')
-        cursor.execute("""
+
+        try:
+            # Execute the table creation queries
+            cursor.execute('''
+            CREATE TABLE IF NOT EXISTS users (
+                id SERIAL PRIMARY KEY,
+                username TEXT UNIQUE NOT NULL,
+                password TEXT NOT NULL,
+                account_type TEXT,
+                phone TEXT,
+                business_type TEXT,
+                location TEXT,
+                bio TEXT,
+                price TEXT,
+                profile_pic TEXT
+            );
+            ''')
+
+            cursor.execute('''
             CREATE TABLE IF NOT EXISTS feedback (
                 id SERIAL PRIMARY KEY,
                 to_user TEXT NOT NULL,
@@ -53,16 +56,29 @@ def init_db():
                 comment TEXT NOT NULL,
                 reply TEXT
             );
-        """)
-        cursor.execute("""
+            ''')
+
+            cursor.execute('''
             CREATE TABLE IF NOT EXISTS reports (
                 id SERIAL PRIMARY KEY,
                 reported_user TEXT NOT NULL,
                 reported_by TEXT NOT NULL,
                 reason TEXT NOT NULL
             );
-        """)
-        conn.commit()
+            ''')
+
+            # Commit changes to the database
+            conn.commit()
+            print("Tables created successfully.")
+        except Exception as e:
+            print(f"Error creating tables: {e}")
+            conn.rollback()  # Rollback changes if any error occurs
+        finally:
+            # Close the cursor and connection
+            cursor.close()
+
+# Call the init_db function to initialize the DB
+init_db()
 
 @app.route('/', methods=['GET', 'POST'])
 def login():

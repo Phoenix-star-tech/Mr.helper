@@ -3,9 +3,9 @@
 <head>
     <title>Loading...</title>
     <style>
- /* From Uiverse.io by vinodjangid07 */
+/* From Uiverse.io by vinodjangid07 */ 
 .loader {
-  width: 100%;
+  width: fit-content;
   height: fit-content;
   display: flex;
   align-items: center;
@@ -13,8 +13,7 @@
 }
 
 .truckWrapper {
-  width: 90vw;
-  max-width: 200px;
+  width: 200px;
   height: 100px;
   display: flex;
   flex-direction: column;
@@ -23,17 +22,14 @@
   justify-content: flex-end;
   overflow-x: hidden;
 }
-
 /* truck upper body */
 .truckBody {
-  width: 65%;
-  max-width: 130px;
+  width: 130px;
   height: fit-content;
   margin-bottom: 6px;
   animation: motion 1s linear infinite;
 }
-
-/* truck suspension animation */
+/* truck suspension animation*/
 @keyframes motion {
   0% {
     transform: translateY(0px);
@@ -45,11 +41,9 @@
     transform: translateY(0px);
   }
 }
-
 /* truck's tires */
 .truckTires {
-  width: 65%;
-  max-width: 130px;
+  width: 130px;
   height: fit-content;
   display: flex;
   align-items: center;
@@ -59,10 +53,9 @@
   bottom: 0;
 }
 .truckTires svg {
-  width: 20px;
+  width: 24px;
 }
 
-/* road below truck */
 .road {
   width: 100%;
   height: 1.5px;
@@ -109,21 +102,6 @@
   }
   100% {
     transform: translateX(-350px);
-  }
-}
-
-/* 🌐 Responsive styles for phones */
-@media screen and (max-width: 480px) {
-  .truckWrapper {
-    height: 80px;
-  }
-
-  .truckTires svg {
-    width: 16px;
-  }
-
-  .lampPost {
-    height: 70px;
   }
 }
 

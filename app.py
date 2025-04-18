@@ -4,7 +4,7 @@ import os
 
 app = Flask(__name__)
 
-TARGET_URL = 'https://www.youtube.com/'  # Replace this with your actual site
+TARGET_URL = 'https://cf62-2406-b400-d1-a71f-89a8-8b4f-94da-8014.ngrok-free.app'  # Replace this with your actual site
 
 def check_website(url):
     try:

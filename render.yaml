@@ -2,5 +2,5 @@ services:
   - type: web
     name: site-checker
     env: python
-    buildCommand: ""
+    buildCommand: gunicorn app:app
     startCommand: python app.py

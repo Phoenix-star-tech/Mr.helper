@@ -4,7 +4,7 @@ import os
 
 app = Flask(__name__)
 
-TARGET_URL = 'https://27bf-2406-b400-d1-5e81-c900-c070-1b40-eb12.ngrok-free.app'  # Replace this with your actual site
+TARGET_URL = 'https://a490-49-204-188-188.ngrok-free.app'  # Replace this with your actual site
 
 def check_website(url):
     try:

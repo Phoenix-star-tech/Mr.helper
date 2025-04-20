@@ -3,107 +3,37 @@
 <head>
     <title>Site Offline</title>
     <style>
-        /* From Uiverse.io by S3nouy */ 
 body {
   margin: 0;
   padding: 0;
-  height: 100px;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #000006;
+  overflow: hidden;
 }
 
 .fire {
-  position: absolute;
-  top: calc(50% - 25px);
-  left: calc(50% - 25px);
-  width: 500px;
-  height: 500px;
+  position: relative;
+  width: 100px;
+  height: 100px;
   background-color: transparent;
-  margin-left: auto;
-  margin-right: auto;
 }
-@keyframes scaleUpDown {
-  0%,
-  100% {
-    transform: scaleY(1) scaleX(1);
-  }
 
-  50%,
-  90% {
-    transform: scaleY(1.1);
-  }
-
-  75% {
-    transform: scaleY(0.95);
-  }
-
-  80% {
-    transform: scaleX(0.95);
+@media (max-width: 768px) {
+  .fire {
+    width: 200px;
+    height: 200px;
   }
 }
 
-@keyframes shake {
-  0%,
-  100% {
-    transform: skewX(0) scale(1);
-  }
-
-  50% {
-    transform: skewX(5deg) scale(0.9);
-  }
-}
-
-@keyframes particleUp {
-  0% {
-    opacity: 0;
-  }
-
-  20% {
-    opacity: 1;
-  }
-
-  80% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-    top: -100%;
-    transform: scale(0.5);
-  }
-}
-
-@keyframes glow {
-  0%,
-  100% {
-    background-color: #ff261e;
-  }
-
-  50% {
-    background-color: #ff261e;
-  }
-}
-
-.fire {
-  position: absolute;
-  top: calc(50% - 25px);
-  left: calc(50% - 25px);
-  width: 50px; /* Reduced size by 50% */
-  height: 50px; /* Reduced size by 50% */
-  background-color: transparent;
-  margin-left: auto;
-  margin-right: auto;
-}
-
+/* Fire center */
 .fire-center {
   position: absolute;
   height: 100%;
   width: 100%;
-  animation: scaleUpDown 3s ease-out;
-  animation-iteration-count: infinite;
-  animation-fill-mode: both;
+  animation: scaleUpDown 3s ease-out infinite both;
 }
 
 .fire-center .main-fire {
@@ -129,18 +59,15 @@ body {
   background-color: #ff261e;
   border-radius: 50%;
   filter: drop-shadow(0 0 10px #d43322);
-  animation: particleUp 2s ease-out 0;
-  animation-iteration-count: infinite;
-  animation-fill-mode: both;
+  animation: particleUp 2s ease-out infinite both;
 }
 
+/* Fire right */
 .fire-right {
   height: 100%;
   width: 100%;
   position: absolute;
-  animation: shake 2s ease-out 0;
-  animation-iteration-count: infinite;
-  animation-fill-mode: both;
+  animation: shake 2s ease-out infinite both;
 }
 
 .fire-right .main-fire {
@@ -165,18 +92,15 @@ body {
   transform: scaleX(0.8) rotate(45deg);
   border-radius: 50%;
   filter: drop-shadow(0 0 10px #ff261e);
-  animation: particleUp 2s ease-out 0;
-  animation-iteration-count: infinite;
-  animation-fill-mode: both;
+  animation: particleUp 2s ease-out infinite both;
 }
 
+/* Fire left */
 .fire-left {
   position: absolute;
   height: 100%;
   width: 100%;
-  animation: shake 3s ease-out 0;
-  animation-iteration-count: infinite;
-  animation-fill-mode: both;
+  animation: shake 3s ease-out infinite both;
 }
 
 .fire-left .main-fire {
@@ -200,10 +124,10 @@ body {
   background-color: #ff261e;
   border-radius: 50%;
   filter: drop-shadow(0 0 10px #d43322);
-  animation: particleUp 3s infinite ease-out 0;
-  animation-fill-mode: both;
+  animation: particleUp 3s infinite ease-out both;
 }
 
+/* Fire bottom */
 .fire-bottom .main-fire {
   position: absolute;
   top: 30%;
@@ -214,9 +138,39 @@ body {
   transform: scaleX(0.8) rotate(45deg);
   border-radius: 0 40% 100% 40%;
   filter: blur(10px);
-  animation: glow 2s ease-out 0;
-  animation-iteration-count: infinite;
-  animation-fill-mode: both;
+  animation: glow 2s ease-out infinite both;
+}
+
+/* Animations */
+@keyframes scaleUpDown {
+  0%, 100% { transform: scaleY(1) scaleX(1); }
+  50%, 90% { transform: scaleY(1.1); }
+  75% { transform: scaleY(0.95); }
+  80% { transform: scaleX(0.95); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: skewX(0) scale(1); }
+  50% { transform: skewX(5deg) scale(0.9); }
+}
+
+@keyframes particleUp {
+  0% { opacity: 0; }
+  20%, 80% { opacity: 1; }
+  100% {
+    opacity: 0;
+    top: -100%;
+    transform: scale(0.5);
+  }
+  strong{
+    size: 40px;
+    color: white;
+  }
+}
+
+@keyframes glow {
+  0%, 100% { background-color: #ff261e; }
+  50% { background-color: #ff261e; }
 }
     </style>
 </head>
@@ -237,7 +191,7 @@ body {
     <div class="fire-bottom">
       <div class="main-fire"></div>
     </div>
-  </div>
+  </div><br>
   <strong>We updateing our site...</strong>  
 </body>
 </html>
